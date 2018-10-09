@@ -1,0 +1,29 @@
+---
+- hosts: tomcat[0]
+  become: True
+  vars:
+     - nexus_url: http://13.233.62.103:8081/repository/maven-releases/
+     - nexus_user: admin
+     - nexus_pwd: admin123
+     - war_version: 0.0.1
+  tasks:
+    - name: Install lxml for nexus
+      pip:
+        name: lxml      
+ 
+    - name: Download war file from Nexus
+      maven_artifact:
+         group_id: in.javahome
+         artifact_id: myweb
+         extension: war
+         version: "{{war_version}}"
+         repository_url: "{{nexus_url}}"
+         username: "{{nexus_user}}"
+         password: "{{nexus_pwd}}"
+         dest: /opt/apache-tomcat-7.0.61/webapps/myweb.war
+      notify:
+          - Restart Tomcat
+  handlers:
+      - name: Restart Tomcat
+        service: tomcat
+        state: restarted     
