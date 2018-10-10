@@ -1,6 +1,6 @@
 [tomcat]
 172.31.11.198 ansible_user=ec2-user
-172.31.18.50  ansible_user=ec2-user
+172.31.13.246 ansible_user=ec2-user
 
 [loadbalancer]
 172.31.31.121  ansible_user=ec2-user
