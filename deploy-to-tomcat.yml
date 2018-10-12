@@ -1,11 +1,8 @@
 ---
 - hosts: tomcat
   become: True
-  vars:
-     - nexus_url: http://172.31.17.173:8081/repository/maven-releases/
-     - nexus_user: admin
-     - nexus_pwd: admin123
-     - war_version: 0.0.1
+  vars_files:
+       - dev-vars.yml
   tasks:
     - name: Install lxml for nexus
       pip:

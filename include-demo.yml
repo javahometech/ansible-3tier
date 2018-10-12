@@ -1,0 +1,5 @@
+---
+- hosts: localhost
+  tasks:
+    - include: one.yml
+    - include: two.yml
